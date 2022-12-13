@@ -19,7 +19,6 @@ jobs:
       id: version-module
       uses: paulhatch/semantic-version@v4
       with:
-        tag_prefix: v
         major_pattern: (MAJOR)
         minor_pattern: (MINOR)
         format: ${major}.${minor}.${patch}
