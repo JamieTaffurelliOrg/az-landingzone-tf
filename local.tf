@@ -76,28 +76,28 @@ locals {
       name             = "management-dev"
       management_group = "dev"
     }
-    /*management_prod = {
+    management_prod = {
       name             = "management-prod"
       management_group = "prod"
     }
     management_shared = {
       name             = "management-shared"
       management_group = "shared"
-    }*/
+    }
   }
   connectivity_subscriptions = {
-    /*connectivity_dev = {
+    connectivity_dev = {
       name             = "connectivity-dev"
       management_group = "dev"
-    }*/
-    /*connectivity_prod = {
+    }
+    connectivity_prod = {
       name             = "connectivity-prod"
       management_group = "prod"
     }
     connectivity_shared = {
       name             = "connectivity-shared"
       management_group = "shared"
-    }*/
+    }
   }
   identity_subscriptions = {
     identity_shared = {
@@ -114,10 +114,10 @@ locals {
       name             = "app-prod"
       management_group = "prod"
     }
-    /*app_shared = {
+    app_shared = {
       name             = "app-shared"
       management_group = "shared"
-    }*/
+    }
   }
   org_policies = [
     {
