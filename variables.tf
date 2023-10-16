@@ -23,9 +23,16 @@ variable "management_group_name_prefix" {
   description = "The prefix to give to the management groups created, e.g, 'mg-jt'"
 }
 
-variable "landing_zone_app_management_group_name" {
-  type        = string
-  description = "The name of the landing zone management group of your app/product"
+variable "landing_zones" {
+  type = list(object({
+    name          = string
+    subscriptions = list(string)
+    management_groups = list(object({
+      name          = string
+      subscriptions = list(string)
+    }))
+  }))
+  description = "Landing zones management groups and subscriptions"
 }
 
 variable "policy_managed_identity_location" {

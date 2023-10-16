@@ -47,22 +47,21 @@ locals {
       name = "shared"
     }
   }
+
   identity_management_groups = {
     shared = {
       name = "shared"
     }
   }
-  app_management_groups = {
-    dev = {
-      name = "dev"
-    }
-    prod = {
-      name = "prod"
-    }
-    shared = {
-      name = "shared"
-    }
-  }
+
+  child_landing_zones = distinct(flatten([
+    for landing_zone in var.landing_zones : [
+      for child_landing_zone in landing_zone.management_groups : {
+        name   = child_landing_zone.name
+        parent = landing_zone.name
+      }
+  ]]))
+
   org_subscriptions = {
     setup_prod = {
       name = "setup-prod"
@@ -71,6 +70,7 @@ locals {
       name = "terraform-external-prod"
     }
   }
+
   management_subscriptions = {
     management_dev = {
       name             = "management-dev"
@@ -85,6 +85,7 @@ locals {
       management_group = "shared"
     }
   }
+
   connectivity_subscriptions = {
     connectivity_dev = {
       name             = "connectivity-dev"
@@ -99,26 +100,32 @@ locals {
       management_group = "shared"
     }
   }
+
   identity_subscriptions = {
     identity_shared = {
       name             = "identity-shared"
       management_group = "shared"
     }
   }
-  app_subscriptions = {
-    app_dev = {
-      name             = "app-dev"
-      management_group = "dev"
-    }
-    app_prod = {
-      name             = "app-prod"
-      management_group = "prod"
-    }
-    app_shared = {
-      name             = "app-shared"
-      management_group = "shared"
-    }
-  }
+
+  landing_zone_subscriptions = distinct(flatten([
+    for landing_zone in var.landing_zones : [
+      for subscription in landing_zone.subscriptions : {
+        name   = subscription
+        parent = landing_zone.name
+      }
+  ]]))
+
+  child_landing_zone_subscriptions = distinct(flatten([
+    for landing_zone in var.landing_zones : [
+      for child_landing_zone in landing_zone.management_groups : [
+        for subscription in child_landing_zone.subscriptions : {
+          name   = subscription
+          parent = child_landing_zone.name
+        }
+      ]
+  ]]))
+
   org_policies = [
     {
       name         = "audit-password"

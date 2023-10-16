@@ -28,16 +28,6 @@ output "identity_management_group_ids" {
   description = "Resource IDs of the identity management groups"
 }
 
-output "app_management_group_id" {
-  value       = azurerm_management_group.app_management_group.id
-  description = "Resource IDs of the app management groups"
-}
-
-output "app_child_management_group_ids" {
-  value       = { for k, v in azurerm_management_group.app_child_management_groups : k => v.id }
-  description = "Resource IDs of the child app management groups"
-}
-
 output "org_subscriptions" {
   value       = { for k, v in azurerm_subscription.org_subscriptions : k => v }
   description = "Properties of the organisation level subscriptions"
@@ -56,9 +46,4 @@ output "identity_subscriptions" {
 output "management_subscriptions" {
   value       = { for k, v in azurerm_subscription.management_subscriptions : k => v }
   description = "Properties of the management subscriptions"
-}
-
-output "app_subscriptions" {
-  value       = { for k, v in azurerm_subscription.app_subscriptions : k => v }
-  description = "Properties of the app subscriptions"
 }
