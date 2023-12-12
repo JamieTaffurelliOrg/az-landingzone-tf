@@ -51,8 +51,8 @@ resource "azurerm_management_group" "identity_management_groups" {
 
 resource "azurerm_management_group" "landing_zone_management_groups" {
   for_each                   = { for k in var.landing_zones : k.name => k }
-  name                       = "${azurerm_management_group.primary_management_groups["landingzones"].name}-${each.value["name"]}"
-  display_name               = "${azurerm_management_group.primary_management_groups["landingzones"].name}-${each.value["name"]}"
+  name                       = "${azurerm_management_group.primary_management_groups["landing_zones"].name}-${each.value["name"]}"
+  display_name               = "${azurerm_management_group.primary_management_groups["landing_zones"].name}-${each.value["name"]}"
   parent_management_group_id = azurerm_management_group.primary_management_groups["landing_zones"].id
 }
 
