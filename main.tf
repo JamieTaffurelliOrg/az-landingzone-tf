@@ -57,9 +57,9 @@ resource "azurerm_management_group" "landing_zone_management_groups" {
 }
 
 resource "azurerm_management_group" "child_landing_zone_management_groups" {
-  for_each                   = { for k in local.child_landing_zones : "${k.parent}-${k.name}" => k }
-  name                       = "${each.value["parent"]}-${each.value["name"]}"
-  display_name               = "${each.value["parent"]}-${each.value["name"]}"
+  for_each                   = { for k in local.child_landing_zones : "${azurerm_management_group.primary_management_groups["landing_zones"].name}-${k.parent}-${k.name}" => k }
+  name                       = "${azurerm_management_group.primary_management_groups["landing_zones"].name}-${each.value["parent"]}-${each.value["name"]}"
+  display_name               = "${azurerm_management_group.primary_management_groups["landing_zones"].name}-${each.value["parent"]}-${each.value["name"]}"
   parent_management_group_id = azurerm_management_group.landing_zone_management_groups["${azurerm_management_group.primary_management_groups["landing_zones"].name}-${each.value["parent"]}"].id
 }
 
@@ -136,6 +136,6 @@ resource "azurerm_subscription" "child_landing_zone_subscriptions" {
 
 resource "azurerm_management_group_subscription_association" "child_landing_zone_associations" {
   for_each            = { for k in local.child_landing_zone_subscriptions : k.name => k if k != null }
-  management_group_id = azurerm_management_group.child_landing_zone_management_groups["${azurerm_management_group.primary_management_groups["landing_zones"].name}-${each.value["parent"]}"].id
+  management_group_id = azurerm_management_group.child_landing_zone_management_groups["${azurerm_management_group.primary_management_groups["landing_zones"].name}-${each.value["grandparent"]}-${each.value["parent"]}"].id
   subscription_id     = "/subscriptions/${azurerm_subscription.child_landing_zone_subscriptions[(each.key)].subscription_id}"
 }
