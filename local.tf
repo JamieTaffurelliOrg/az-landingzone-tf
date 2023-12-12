@@ -120,8 +120,9 @@ locals {
     for landing_zone in var.landing_zones : [
       for child_landing_zone in landing_zone.management_groups : [
         for subscription in child_landing_zone.subscriptions : {
-          name   = subscription
-          parent = child_landing_zone.name
+          name        = subscription
+          parent      = child_landing_zone.name
+          grandparent = landing_zone.name
         }
       ]
   ]]))
