@@ -35,6 +35,12 @@ variable "landing_zones" {
   description = "Landing zones management groups and subscriptions"
 }
 
+variable "sandbox_subscriptions" {
+  type        = list(string)
+  default     = []
+  description = "Sandbox subscriptions"
+}
+
 variable "policy_managed_identity_location" {
   type        = string
   description = "The location of the managed identity to attach to policies"
