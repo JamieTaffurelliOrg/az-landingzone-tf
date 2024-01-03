@@ -139,3 +139,16 @@ resource "azurerm_management_group_subscription_association" "child_landing_zone
   management_group_id = azurerm_management_group.child_landing_zone_management_groups["${azurerm_management_group.primary_management_groups["landing_zones"].name}-${each.value["grandparent"]}-${each.value["parent"]}"].id
   subscription_id     = "/subscriptions/${azurerm_subscription.child_landing_zone_subscriptions[(each.key)].subscription_id}"
 }
+
+resource "azurerm_subscription" "sandbox_subscriptions" {
+  for_each          = toset(var.sandbox_subscriptions)
+  subscription_name = each.key
+  alias             = each.key
+  billing_scope_id  = data.azurerm_billing_mca_account_scope.mca_account.id
+}
+
+resource "azurerm_management_group_subscription_association" "sandbox_associations" {
+  for_each            = toset(var.sandbox_subscriptions)
+  management_group_id = azurerm_management_group.primary_management_groups["${var.management_group_name_prefix}-sandbox"].id
+  subscription_id     = "/subscriptions/${azurerm_subscription.sandbox_subscriptions[(each.key)].subscription_id}"
+}

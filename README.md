@@ -36,12 +36,14 @@ No modules.
 | [azurerm_management_group_subscription_association.landing_zone_associations](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group_subscription_association) | resource |
 | [azurerm_management_group_subscription_association.management_associations](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group_subscription_association) | resource |
 | [azurerm_management_group_subscription_association.org_associations](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group_subscription_association) | resource |
+| [azurerm_management_group_subscription_association.sandbox_associations](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group_subscription_association) | resource |
 | [azurerm_subscription.child_landing_zone_subscriptions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subscription) | resource |
 | [azurerm_subscription.connectivity_subscriptions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subscription) | resource |
 | [azurerm_subscription.identity_subscriptions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subscription) | resource |
 | [azurerm_subscription.landing_zone_subscriptions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subscription) | resource |
 | [azurerm_subscription.management_subscriptions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subscription) | resource |
 | [azurerm_subscription.org_subscriptions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subscription) | resource |
+| [azurerm_subscription.sandbox_subscriptions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subscription) | resource |
 | [azurerm_billing_mca_account_scope.mca_account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/billing_mca_account_scope) | data source |
 
 ## Inputs
@@ -55,6 +57,7 @@ No modules.
 | <a name="input_management_group_name_prefix"></a> [management\_group\_name\_prefix](#input\_management\_group\_name\_prefix) | The prefix to give to the management groups created, e.g, 'mg-jt' | `string` | n/a | yes |
 | <a name="input_org_management_group_name"></a> [org\_management\_group\_name](#input\_org\_management\_group\_name) | The name of the organsation management group | `string` | n/a | yes |
 | <a name="input_policy_managed_identity_location"></a> [policy\_managed\_identity\_location](#input\_policy\_managed\_identity\_location) | The location of the managed identity to attach to policies | `string` | n/a | yes |
+| <a name="input_sandbox_subscriptions"></a> [sandbox\_subscriptions](#input\_sandbox\_subscriptions) | Sandbox subscriptions | `list(string)` | `[]` | no |
 
 ## Outputs
 
