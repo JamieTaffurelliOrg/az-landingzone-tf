@@ -149,6 +149,6 @@ resource "azurerm_subscription" "sandbox_subscriptions" {
 
 resource "azurerm_management_group_subscription_association" "sandbox_associations" {
   for_each            = toset(var.sandbox_subscriptions)
-  management_group_id = azurerm_management_group.primary_management_groups["${var.management_group_name_prefix}-sandbox"].id
+  management_group_id = azurerm_management_group.primary_management_groups["sandbox"].id
   subscription_id     = "/subscriptions/${azurerm_subscription.sandbox_subscriptions[(each.key)].subscription_id}"
 }
